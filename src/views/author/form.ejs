@@ -1,0 +1,25 @@
+<% const action = locals.author?.id ? "Edit" : "Add" %>
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title><%= action %> Author - Yomu</title>
+</head>
+<body>
+  <h1><%= action %> Author</h1>
+
+  <%- include("../partials/errors.ejs") %>
+
+  <form action="/authors/<%= action === 'Edit' ? `${author.id}/edit` : 'new' %>" method="post">
+    <div class="form-group">
+      <label for="name">Name</label>
+      <input type="text" name="name" id="name" value="<%= locals.author?.name %>">
+    </div>
+
+    <button type="submit"><%= action %> Author</button>
+    <a href="/authors">Cancel</a>
+  </form>
+</body>
+</html>
