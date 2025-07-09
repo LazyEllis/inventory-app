@@ -27,4 +27,13 @@ const authorValidators = [
     .withMessage("You must enter the author's name"),
 ];
 
+const statusValidators = [
+  body("name")
+    .trim()
+    .notEmpty()
+    .withMessage("You must enter the status's name"),
+];
+
 export const validateAuthor = validate(authorValidators, "author");
+
+export const validateStatus = validate(statusValidators, "status");
