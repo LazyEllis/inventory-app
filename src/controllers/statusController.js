@@ -7,9 +7,11 @@ import {
 } from "../models/statusModel.js";
 import NotFoundError from "../errors/NotFoundError.js";
 
+const ROUTE_NAME = "Status";
+
 export const getStatusList = async (req, res) => {
   const status = await findStatus();
-  res.render("status/index", { status });
+  res.render("list", { data: status, ROUTE_NAME });
 };
 
 export const getStatus = async (req, res) => {
@@ -21,11 +23,11 @@ export const getStatus = async (req, res) => {
     throw new NotFoundError("Status Not Found");
   }
 
-  res.render("status/profile", { status });
+  res.render("profile", { data: status, ROUTE_NAME });
 };
 
 export const renderAddStatusForm = async (req, res) => {
-  res.render("status/form");
+  res.render("form", { ROUTE_NAME });
 };
 
 export const addStatus = async (req, res) => {
@@ -44,7 +46,7 @@ export const renderEditStatusForm = async (req, res) => {
     throw new NotFoundError("Status Not Found");
   }
 
-  res.render("status/form", { status });
+  res.render("form", { data: status, ROUTE_NAME });
 };
 
 export const editStatus = async (req, res) => {

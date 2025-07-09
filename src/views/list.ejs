@@ -1,0 +1,25 @@
+<% const routePrefix = (ROUTE_NAME.endsWith('s') ? ROUTE_NAME : ROUTE_NAME.concat('s')).toLowerCase(); %> 
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title><%= ROUTE_NAME %> - Yomu</title>
+</head>
+<body>
+  <h1><%= ROUTE_NAME %></h1>
+  <a href="/<%= routePrefix %>/new">Add <%= ROUTE_NAME %></a>
+  <ul>
+    <% data.forEach(item => { %>
+      <li>
+        <a href="/<%= routePrefix %>/<%= item.id %>"><%= item.name %></a>
+        <a href="/<%= routePrefix %>/<%= item.id %>/edit/">Edit</a>
+        <form action="/<%= routePrefix %>/<%= item.id %>/delete/" method="post">
+          <button type="submit">Delete</button>
+        </form>
+      </li>
+    <% }); %>
+  </ul>
+</body>
+</html>

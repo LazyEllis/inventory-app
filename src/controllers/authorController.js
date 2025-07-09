@@ -7,9 +7,11 @@ import {
 } from "../models/authorModel.js";
 import NotFoundError from "../errors/NotFoundError.js";
 
+const ROUTE_NAME = "Author";
+
 export const getAuthorList = async (req, res) => {
   const authors = await findAuthors();
-  res.render("author/index", { authors });
+  res.render("list", { data: authors, ROUTE_NAME });
 };
 
 export const getAuthor = async (req, res) => {
@@ -21,11 +23,11 @@ export const getAuthor = async (req, res) => {
     throw new NotFoundError("Author Not Found");
   }
 
-  res.render("author/profile", { author });
+  res.render("profile", { data: author, ROUTE_NAME });
 };
 
 export const renderAddAuthorForm = async (req, res) => {
-  res.render("author/form");
+  res.render("form", { ROUTE_NAME });
 };
 
 export const addAuthor = async (req, res) => {
@@ -44,7 +46,7 @@ export const renderEditAuthorForm = async (req, res) => {
     throw new NotFoundError("Author Not Found");
   }
 
-  res.render("author/form", { author });
+  res.render("form", { data: author, ROUTE_NAME });
 };
 
 export const editAuthor = async (req, res) => {

@@ -1,6 +1,16 @@
 import { body, validationResult } from "express-validator";
 
-const validate = (validators, model) => [
+const nameValidator = (model) =>
+  body("name")
+    .trim()
+    .notEmpty()
+    .withMessage(`You must enter the ${model}'s name`);
+
+const authorValidators = [nameValidator("author")];
+
+const statusValidators = [nameValidator("status")];
+
+const validate = (validators, routeName) => [
   ...validators,
   (req, res, next) => {
     const { id } = req.params;
@@ -11,29 +21,17 @@ const validate = (validators, model) => [
     }
 
     if (!errors.isEmpty()) {
-      return res
-        .status(400)
-        .render(`${model}/form`, { [model]: req.body, errors: errors.array() });
+      return res.status(400).render(`form`, {
+        data: req.body,
+        ROUTE_NAME: routeName,
+        errors: errors.array(),
+      });
     }
 
     next();
   },
 ];
 
-const authorValidators = [
-  body("name")
-    .trim()
-    .notEmpty()
-    .withMessage("You must enter the author's name"),
-];
+export const validateAuthor = validate(authorValidators, "Author");
 
-const statusValidators = [
-  body("name")
-    .trim()
-    .notEmpty()
-    .withMessage("You must enter the status's name"),
-];
-
-export const validateAuthor = validate(authorValidators, "author");
-
-export const validateStatus = validate(statusValidators, "status");
+export const validateStatus = validate(statusValidators, "Status");
