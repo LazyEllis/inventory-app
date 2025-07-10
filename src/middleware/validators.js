@@ -32,6 +32,7 @@ const authorValidators = [nameValidator("author")];
 const statusValidators = [nameValidator("status")];
 const roleValidators = [nameValidator("role")];
 const demographicValidators = [nameValidator("demographic")];
+const genreValidators = [nameValidator("genre")];
 
 export const validateAuthor = validate(authorValidators, "Author");
 export const validateStatus = validate(statusValidators, "Status");
@@ -40,3 +41,4 @@ export const validateDemographic = validate(
   demographicValidators,
   "Demographic",
 );
+export const validateGenre = validate(genreValidators, "Demographic");
