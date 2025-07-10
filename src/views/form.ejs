@@ -27,6 +27,17 @@
       <input type="text" name="name" id="name" value="<%= locals.data?.name %>">
     </div>
 
+    <% if (ROUTE_NAME === "Magazine") {%>
+      <div class="form-group">
+        <label for="demographic">Demographic</label>
+        <select name="demographic_id" id="demographic">
+          <% demographics.forEach(demographic => { %>
+            <option value="<%= demographic.id %>" <%= locals.data?.demographic_id === demographic.id ? "selected" : undefined %>><%= demographic.name %></option>
+          <% }); %>
+        </select>
+      </div>
+    <% } %>    
+
     <button type="submit"><%= title %></button>
     <a href="/<%= routePrefix %>">Cancel</a>
   </form>

@@ -6,6 +6,7 @@ import statusRouter from "./routes/statusRoute.js";
 import roleRouter from "./routes/roleRouter.js";
 import demographicRouter from "./routes/demographicRouter.js";
 import genreRouter from "./routes/genreRouter.js";
+import magazineRouter from "./routes/magazineRouter.js";
 
 const app = express();
 
@@ -19,6 +20,7 @@ app.use("/status", statusRouter);
 app.use("/roles", roleRouter);
 app.use("/demographics", demographicRouter);
 app.use("/genres", genreRouter);
+app.use("/magazines", magazineRouter);
 
 // eslint-disable-next-line no-unused-vars
 app.use((err, req, res, next) => {

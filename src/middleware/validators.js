@@ -1,4 +1,5 @@
 import { body, validationResult } from "express-validator";
+import { findDemographics } from "../models/demographicModel.js";
 
 const nameValidator = (model) =>
   body("name")
@@ -8,12 +9,17 @@ const nameValidator = (model) =>
 
 const validate = (validators, routeName) => [
   ...validators,
-  (req, res, next) => {
+  async (req, res, next) => {
     const { id } = req.params;
     const errors = validationResult(req);
+    let demographics;
 
     if (id) {
       req.body.id = id;
+    }
+
+    if (routeName === "Magazine") {
+      demographics = await findDemographics();
     }
 
     if (!errors.isEmpty()) {
@@ -21,6 +27,7 @@ const validate = (validators, routeName) => [
         data: req.body,
         ROUTE_NAME: routeName,
         errors: errors.array(),
+        demographics,
       });
     }
 
@@ -33,6 +40,15 @@ const statusValidators = [nameValidator("status")];
 const roleValidators = [nameValidator("role")];
 const demographicValidators = [nameValidator("demographic")];
 const genreValidators = [nameValidator("genre")];
+const magazineValidators = [
+  nameValidator("magazine"),
+  body("demographic_id")
+    .trim()
+    .notEmpty()
+    .withMessage("You must select your magazine's demographic")
+    .isInt()
+    .withMessage("You must select a valid demographic option"),
+];
 
 export const validateAuthor = validate(authorValidators, "Author");
 export const validateStatus = validate(statusValidators, "Status");
@@ -42,3 +58,4 @@ export const validateDemographic = validate(
   "Demographic",
 );
 export const validateGenre = validate(genreValidators, "Demographic");
+export const validateMagazine = validate(magazineValidators, "Magazine");
