@@ -31,7 +31,12 @@ const validate = (validators, routeName) => [
 const authorValidators = [nameValidator("author")];
 const statusValidators = [nameValidator("status")];
 const roleValidators = [nameValidator("role")];
+const demographicValidators = [nameValidator("demographic")];
 
 export const validateAuthor = validate(authorValidators, "Author");
 export const validateStatus = validate(statusValidators, "Status");
 export const validateRole = validate(roleValidators, "Role");
+export const validateDemographic = validate(
+  demographicValidators,
+  "Demographic",
+);
