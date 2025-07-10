@@ -6,10 +6,6 @@ const nameValidator = (model) =>
     .notEmpty()
     .withMessage(`You must enter the ${model}'s name`);
 
-const authorValidators = [nameValidator("author")];
-
-const statusValidators = [nameValidator("status")];
-
 const validate = (validators, routeName) => [
   ...validators,
   (req, res, next) => {
@@ -32,6 +28,10 @@ const validate = (validators, routeName) => [
   },
 ];
 
-export const validateAuthor = validate(authorValidators, "Author");
+const authorValidators = [nameValidator("author")];
+const statusValidators = [nameValidator("status")];
+const roleValidators = [nameValidator("role")];
 
+export const validateAuthor = validate(authorValidators, "Author");
 export const validateStatus = validate(statusValidators, "Status");
+export const validateRole = validate(roleValidators, "Role");

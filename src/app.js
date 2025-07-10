@@ -3,6 +3,7 @@ import path from "path";
 import "dotenv/config";
 import authorRouter from "./routes/authorRouter.js";
 import statusRouter from "./routes/statusRoute.js";
+import roleRouter from "./routes/roleRouter.js";
 
 const app = express();
 
@@ -13,6 +14,7 @@ app.use(express.urlencoded({ extended: true }));
 
 app.use("/authors", authorRouter);
 app.use("/status", statusRouter);
+app.use("/roles", roleRouter);
 
 // eslint-disable-next-line no-unused-vars
 app.use((err, req, res, next) => {
