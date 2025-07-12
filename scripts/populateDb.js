@@ -45,19 +45,17 @@ CREATE TABLE mangas (
   magazine_id INT NOT NULL REFERENCES magazines
 );
 
-CREATE TABLE manga_authors (
-  id INT PRIMARY KEY GENERATED ALWAYS AS IDENTITY,
-  manga_id INT NOT NULL REFERENCES mangas,
+CREATE TABLE mangas_authors (
+  manga_id INT NOT NULL REFERENCES mangas ON DELETE CASCADE,
   author_id INT NOT NULL REFERENCES authors,
   role_id INT NOT NULL REFERENCES roles,
-  UNIQUE (manga_id, author_id)
+  PRIMARY KEY (manga_id, author_id)
 );
 
-CREATE TABLE manga_genres (
-  id INT PRIMARY KEY GENERATED ALWAYS AS IDENTITY,
-  manga_id INT NOT NULL REFERENCES mangas,
+CREATE TABLE mangas_genres (
+  manga_id INT NOT NULL REFERENCES mangas ON DELETE CASCADE,
   genre_id INT NOT NULL REFERENCES genres,
-  UNIQUE (manga_id, genre_id)
+  PRIMARY KEY (manga_id, genre_id)
 )
 `;
 
