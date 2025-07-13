@@ -13,7 +13,7 @@
   <ul>
     <% data.forEach(item => { %>
       <li>
-        <a href="/<%= routePrefix %>/<%= item.id %>"><%= item.name %></a>
+        <a href="/<%= routePrefix %>/<%= item.id %>"><%= item.name || item.title %></a>
         <a href="/<%= routePrefix %>/<%= item.id %>/edit/">Edit</a>
         <form action="/<%= routePrefix %>/<%= item.id %>/delete/" method="post">
           <button type="submit">Delete</button>
