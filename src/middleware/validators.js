@@ -1,5 +1,5 @@
 import { body, validationResult } from "express-validator";
-import { findDemographics } from "../models/demographicModel.js";
+import { fetchSelectionData } from "../utils/fetchSelectionData.js";
 
 const nameValidator = (model) =>
   body("name")
@@ -7,27 +7,20 @@ const nameValidator = (model) =>
     .notEmpty()
     .withMessage(`You must enter the ${model}'s name`);
 
-const validate = (validators, routeName) => [
+const validate = (validators, route) => [
   ...validators,
   async (req, res, next) => {
-    const { id } = req.params;
     const errors = validationResult(req);
-    let demographics;
+    req.body.id = req.params.id;
 
-    if (id) {
-      req.body.id = id;
-    }
-
-    if (routeName === "Magazine") {
-      demographics = await findDemographics();
-    }
+    const selectionData = await fetchSelectionData(route);
 
     if (!errors.isEmpty()) {
       return res.status(400).render(`form`, {
         data: req.body,
-        ROUTE_NAME: routeName,
+        ROUTE_NAME: route,
+        ...selectionData,
         errors: errors.array(),
-        demographics,
       });
     }
 
@@ -35,27 +28,26 @@ const validate = (validators, routeName) => [
   },
 ];
 
-const authorValidators = [nameValidator("author")];
-const statusValidators = [nameValidator("status")];
-const roleValidators = [nameValidator("role")];
-const demographicValidators = [nameValidator("demographic")];
-const genreValidators = [nameValidator("genre")];
-const magazineValidators = [
-  nameValidator("magazine"),
-  body("demographic_id")
-    .trim()
-    .notEmpty()
-    .withMessage("You must select your magazine's demographic")
-    .isInt()
-    .withMessage("You must select a valid demographic option"),
-];
+export const validateAuthor = validate([nameValidator("author")], "Author");
 
-export const validateAuthor = validate(authorValidators, "Author");
-export const validateStatus = validate(statusValidators, "Status");
-export const validateRole = validate(roleValidators, "Role");
+export const validateStatus = validate([nameValidator("status")], "Status");
+
+export const validateRole = validate([nameValidator("role")], "Role");
+
 export const validateDemographic = validate(
-  demographicValidators,
+  [nameValidator("demographic")],
   "Demographic",
 );
-export const validateGenre = validate(genreValidators, "Demographic");
-export const validateMagazine = validate(magazineValidators, "Magazine");
+
+export const validateGenre = validate([nameValidator("genre")], "Genre");
+
+export const validateMagazine = validate(
+  [
+    nameValidator("magazine"),
+    body("demographic_id")
+      .trim()
+      .isInt()
+      .withMessage("You must select a valid demographic"),
+  ],
+  "Magazine",
+);
