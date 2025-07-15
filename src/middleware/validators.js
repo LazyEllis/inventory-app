@@ -44,10 +44,9 @@ export const validateGenre = validate([nameValidator("genre")], "Genre");
 export const validateMagazine = validate(
   [
     nameValidator("magazine"),
-    body("demographic_id")
-      .trim()
-      .isInt()
-      .withMessage("You must select a valid demographic"),
+    body("demographic_id", "You must select a valid demographic")
+      .toInt()
+      .isInt(),
   ],
   "Magazine",
 );
