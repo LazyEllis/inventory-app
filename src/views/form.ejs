@@ -50,7 +50,7 @@
       <fieldset class="form-group">
         <legend>Authors</legend>
         <% authors.forEach(author => { %>
-          <input type="checkbox" class="author" name="authors" id="author-<%= author.id %>" value="<%= author.id %>">
+          <input type="checkbox" class="author" name="authors[<%= author.id %>][id]" id="author-<%= author.id %>" value="<%= author.id %>" <%= locals.data?.authors?.find(selected => selected.id === author.id) ? "checked" : undefined %>>
           <label for="author-<%= author.id %>"><%= author.name %></label>
         <% }); %>
       </fieldset>
@@ -58,20 +58,24 @@
       <fieldset id="author-roles">
         <legend>Author Roles</legend>
 
-        <div class="form-group role">
-          <label></label>
-          <select name="roles">
-            <% roles.forEach(role => { %>
-              <option value="<%= role.id %>"><%= role.name %></option>
-            <% }); %>
-          </select>
-        </div>
+        <% authors.forEach(author => { %>
+          <% if (locals.data?.authors?.find(selected => selected.id === author.id)) { %> 
+            <div class="form-group">
+              <label for="author-<%= author.id %>-role"><%= author.name %>'s Role</label>
+              <select name="authors[<%= author.id %>][role]" id="author-<%= author.id %>-role">
+                <% roles.forEach(role => { %>
+                  <option value="<%= role.id %>" <%= locals.data?.authors?.find(selected => selected.id === author.id && selected.role === role.id) ? "selected" : undefined %>><%= role.name %></option>
+                <% }); %>
+              </select>
+            </div>
+          <% } %>
+        <% }); %>
       </fieldset>
 
-      <fieldset class="form-group" id="genre-form-group">
+      <fieldset class="form-group">
         <legend>Genre</legend>
         <% genres.forEach(genre => { %>
-          <input type="checkbox" name="genres" id="genre-<%= genre.id %>" value="<%= genre.id %>">
+          <input type="checkbox" name="genres[<%= genre.id %>][id]" id="genre-<%= genre.id %>" value="<%= genre.id %>" <%= locals.data?.genres?.find(selected => selected.id === genre.id) ? "checked" : undefined %>>
           <label for="genre-<%= genre.id %>"><%= genre.name %></label>
         <% }); %>
       </fieldset>
@@ -118,5 +122,16 @@
     <button type="submit"><%= title %></button>
     <a href="/<%= routePrefix %>">Cancel</a>
   </form>
+
+  <template>
+    <div class="form-group">
+      <label></label>
+      <select name="roles">
+        <% roles.forEach(role => { %>
+        <option value="<%= role.id %>"><%= role.name %></option>
+        <% }); %>
+      </select>
+    </div>
+  </template>
 </body>
 </html>

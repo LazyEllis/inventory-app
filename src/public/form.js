@@ -33,4 +33,6 @@ authorCheckboxes.forEach((checkbox) =>
   checkbox.addEventListener("change", renderRoleSections),
 );
 
-renderRoleSections();
+if (!authorRolesFieldset.querySelector(".form-group")) {
+  renderRoleSections();
+}
