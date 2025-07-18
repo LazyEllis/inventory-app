@@ -3,17 +3,7 @@
   const routePrefix = (ROUTE_NAME.endsWith('s') ? ROUTE_NAME : ROUTE_NAME.concat('s')).toLowerCase();
 %> 
 
-<!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title><%= title %> - Yomu</title>
-  <script src="/form.js" type="module"></script>
-</head>
-<body>
-  <h1><%= title %></h1>
-
+<%- include("partials/header", { title: `${title} - Yomu`, ROUTE_NAME, heading: title }) %>
   <% if (locals.errors) {%>
     <ul>
       <% errors.forEach(error => { %>
@@ -133,5 +123,4 @@
     <button type="submit"><%= title %></button>
     <a href="/<%= routePrefix %>">Cancel</a>
   </form>
-</body>
-</html>
+<%- include("partials/footer") %>

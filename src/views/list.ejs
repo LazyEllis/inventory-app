@@ -1,14 +1,6 @@
 <% const routePrefix = (ROUTE_NAME.endsWith('s') ? ROUTE_NAME : ROUTE_NAME.concat('s')).toLowerCase(); %> 
 
-<!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title><%= ROUTE_NAME %> - Yomu</title>
-</head>
-<body>
-  <h1><%= ROUTE_NAME %></h1>
+<%- include("partials/header", { title: `${ROUTE_NAME} - Yomu`, heading: ROUTE_NAME }) %>
   <a href="/<%= routePrefix %>/new">Add <%= ROUTE_NAME %></a>
   <ul>
     <% data.forEach(item => { %>
@@ -21,5 +13,4 @@
       </li>
     <% }); %>
   </ul>
-</body>
-</html>
+<%- include("partials/footer") %>
