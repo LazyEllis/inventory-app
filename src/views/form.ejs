@@ -117,21 +117,21 @@
         <label for="chapters">Chapters</label>
         <input type="number" name="chapters" id="chapters" value="<%= locals.data?.chapters %>">
       </div>
+
+      <template>
+        <div class="form-group">
+          <label></label>
+          <select name="roles">
+            <% roles.forEach(role => { %>
+            <option value="<%= role.id %>"><%= role.name %></option>
+            <% }); %>
+          </select>
+        </div>
+      </template>
     <% } %>
 
     <button type="submit"><%= title %></button>
     <a href="/<%= routePrefix %>">Cancel</a>
   </form>
-
-  <template>
-    <div class="form-group">
-      <label></label>
-      <select name="roles">
-        <% roles.forEach(role => { %>
-        <option value="<%= role.id %>"><%= role.name %></option>
-        <% }); %>
-      </select>
-    </div>
-  </template>
 </body>
 </html>
