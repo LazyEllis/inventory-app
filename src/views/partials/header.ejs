@@ -1,12 +1,45 @@
+<% 
+  const navLinks = [
+    { href: "/", text: "Home" },
+    { href: "/mangas", text: "Mangas" },
+    { href: "/authors", text: "Authors" },
+    { href: "/genres", text: "Genres" },
+    { href: "/demographics", text: "Demographics" },
+    { href: "/magazines", text: "Magazines" },
+    { href: "/status", text: "Status" },
+    { href: "/roles", text: "Roles" },
+  ]
+
+  const routeText = locals.ROUTE_NAME?.endsWith('s') ? locals.ROUTE_NAME : locals.ROUTE_NAME?.concat('s')
+%>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title><%= title %></title>
+  <link rel="stylesheet" href="/reset.css">
+  <link rel="stylesheet" href="/globals.css">
+  <% if (locals.style) { %>
+    <link rel="stylesheet" href="<%= style %>">
+  <% } %>
   <% if (locals.ROUTE_NAME === "Manga") { %>
     <script type="module" src="/form.js"></script>
   <% } %>
 </head>
 <body>
-  <h1><%= heading %></h1>
+  <header>
+    <div>
+      <div class="brand">Yomu</div>
+    </div>
+    <nav>
+      <ul class="nav-list">
+       <% navLinks.forEach(link => { %>
+          <li><a href="<%= link.href %>" class="nav-link<%= (link.href === "/" && !routeText) || (link.text === routeText) ? " current" : undefined  %>"><%= link.text %></a></li>
+       <% }); %>
+      </ul>
+    </nav>
+  </header>
+  <main>
+    <h1><%= heading %></h1>
