@@ -42,4 +42,11 @@
     </nav>
   </header>
   <main>
-    <h1><%= heading %></h1>
+    <% if (locals.action) { %>
+      <div class="action-heading">
+        <h1><%= heading %></h1>
+        <a href="<%= action.link %>" class="btn info"><%= action.name %></a>
+      </div>
+    <% } else { %> 
+      <h1><%= heading %></h1>
+    <% } %>

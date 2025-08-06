@@ -1,15 +1,34 @@
-<% const routePrefix = (ROUTE_NAME.endsWith('s') ? ROUTE_NAME : ROUTE_NAME.concat('s')).toLowerCase(); %> 
+<% 
+  const routePrefix = (ROUTE_NAME.endsWith('s') ? ROUTE_NAME : ROUTE_NAME.concat('s')).toLowerCase();
+  const heading = routePrefix.replace(/\w\S*/g, text => text.charAt(0).toUpperCase() + text.substring(1));
+%> 
 
-<%- include("partials/header", { title: `${ROUTE_NAME} - Yomu`, heading: ROUTE_NAME }) %>
-  <a href="/<%= routePrefix %>/new">Add <%= ROUTE_NAME %></a>
-  <ul>
+<%- include("partials/header", { title: `${ROUTE_NAME} - Yomu`, heading, action: { name: `Add ${ROUTE_NAME}`, link: `/${routePrefix}/new` },  style: "/list.css" }) %>
+  <ul class="card-list">
     <% data.forEach(item => { %>
-      <li>
-        <a href="/<%= routePrefix %>/<%= item.id %>"><%= item.name || item.title %></a>
-        <a href="/<%= routePrefix %>/<%= item.id %>/edit/">Edit</a>
-        <form action="/<%= routePrefix %>/<%= item.id %>/delete/" method="post">
-          <button type="submit">Delete</button>
-        </form>
+      <li class="card">
+        <div class="card-body">
+          <% if (ROUTE_NAME === "Manga") { %>
+            <div class="row">
+              <a href="/<%= routePrefix %>/<%= item.id %>" class="card-title"><%= item.title %></a>
+              <div><%= item.start_date.getFullYear() %> - <%= item.end_date?.getFullYear() || '?' %></div>
+            </div>
+            <div class="row">
+              <div><%= item.status %></div>
+              <div><%= item.volumes || '?' %> vol, <%= item.chapters || '?' %> chp</div>
+            </div>
+          <% } else { %>
+            <a href="/<%= routePrefix %>/<%= item.id %>" class="card-title"><%= item.name %></a>
+          <% } %>
+        </div>
+        <div class="card-footer">
+          <div class="row">
+            <a href="/<%= routePrefix %>/<%= item.id %>/edit/" class="btn white">Edit</a>
+            <form action="/<%= routePrefix %>/<%= item.id %>/delete/" method="post">
+              <button type="submit" class="btn danger">Delete</button>
+            </form>
+          </div>
+        </div>
       </li>
     <% }); %>
   </ul>

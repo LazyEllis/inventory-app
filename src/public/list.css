@@ -1,0 +1,32 @@
+.card-list {
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-6);
+  margin-top: var(--spacing-6);
+}
+
+.card-title {
+  font-weight: 600;
+
+  &:hover {
+    color: var(--color-white);
+  }
+}
+
+.card {
+  border: 1px solid var(--color-white-10);
+}
+
+.card-body {
+  padding: var(--spacing-4);
+  border-bottom: 1px solid var(--color-white-10);
+}
+
+.card-footer {
+  padding: var(--spacing-2) var(--spacing-4);
+}
+
+.row {
+  display: flex;
+  justify-content: space-between;
+}
