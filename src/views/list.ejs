@@ -20,6 +20,13 @@
             </div>
           <% } else if (ROUTE_NAME === "Role") { %>
             <div class="card-title"><%= item.name %></div>
+          <% } else if (ROUTE_NAME === "Magazine") { %>
+            <div>
+               <a href="/mangas?<%= routeFilter %>=<%= item.id %>" class="card-title"><%= item.name %></a>
+            </div>
+            <div>
+              <div><%= item.demographic %></div>
+            </div>
           <% } else { %>
             <a href="/mangas?<%= routeFilter %>=<%= item.id %>" class="card-title"><%= item.name %></a>
           <% } %>
