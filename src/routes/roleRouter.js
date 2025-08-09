@@ -3,7 +3,6 @@ import {
   addRole,
   deleteRole,
   editRole,
-  getRole,
   getRoleList,
   renderAddRoleForm,
   renderEditRoleForm,
@@ -17,8 +16,6 @@ roleRouter.get("/", getRoleList);
 roleRouter.get("/new", renderAddRoleForm);
 
 roleRouter.post("/new", validateRole, addRole);
-
-roleRouter.get("/:id", getRole);
 
 roleRouter.get("/:id/edit", renderEditRoleForm);
 

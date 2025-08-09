@@ -3,7 +3,6 @@ import {
   addMagazine,
   deleteMagazine,
   editMagazine,
-  getMagazine,
   getMagazineList,
   renderAddMagazineForm,
   renderEditMagazineForm,
@@ -17,8 +16,6 @@ magazineRouter.get("/", getMagazineList);
 magazineRouter.get("/new", renderAddMagazineForm);
 
 magazineRouter.post("/new", validateMagazine, addMagazine);
-
-magazineRouter.get("/:id", getMagazine);
 
 magazineRouter.get("/:id/edit", renderEditMagazineForm);
 

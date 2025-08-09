@@ -14,18 +14,6 @@ export const getRoleList = async (req, res) => {
   res.render("list", { data: roles, ROUTE_NAME });
 };
 
-export const getRole = async (req, res) => {
-  const { id } = req.params;
-
-  const role = await findRoleById(id);
-
-  if (!role) {
-    throw new NotFoundError("Role Not Found");
-  }
-
-  res.render("profile", { data: role, ROUTE_NAME });
-};
-
 export const renderAddRoleForm = async (req, res) => {
   res.render("form", { ROUTE_NAME });
 };

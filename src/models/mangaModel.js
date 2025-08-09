@@ -1,6 +1,20 @@
 import pool from "../config/pool.js";
 
-export const findMangas = async () => {
+const FILTER_FIELDS = {
+  author: "authors.id",
+  genre: "genres.id",
+  demographic: "demographics.id",
+  magazine: "magazines.id",
+  status: "status.id",
+};
+
+export const findMangas = async (filter = null) => {
+  const filterClause = filter
+    ? `WHERE ${FILTER_FIELDS[filter.field]} = $1`
+    : "";
+
+  const queryValues = filter ? [filter.value] : [];
+
   const query = `
     SELECT
       mangas.id,
@@ -31,11 +45,12 @@ export const findMangas = async () => {
       ON mangas.id = mangas_genres.manga_id
     JOIN genres
       ON mangas_genres.genre_id = genres.id
+    ${filterClause}
     GROUP BY mangas.id, status.id, magazines.id, demographics.id
     ORDER BY mangas.title;
   `;
 
-  const { rows } = await pool.query(query);
+  const { rows } = await pool.query(query, queryValues);
 
   return rows;
 };

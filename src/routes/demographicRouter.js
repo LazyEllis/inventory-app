@@ -3,7 +3,6 @@ import {
   addDemographic,
   deleteDemographic,
   editDemographic,
-  getDemographic,
   getDemographicList,
   renderAddDemographicForm,
   renderEditDemographicForm,
@@ -17,8 +16,6 @@ demographicRouter.get("/", getDemographicList);
 demographicRouter.get("/new", renderAddDemographicForm);
 
 demographicRouter.post("/new", validateDemographic, addDemographic);
-
-demographicRouter.get("/:id", getDemographic);
 
 demographicRouter.get("/:id/edit", renderEditDemographicForm);
 

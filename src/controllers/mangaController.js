@@ -11,8 +11,21 @@ import NotFoundError from "../errors/NotFoundError.js";
 
 const ROUTE_NAME = "Manga";
 
+// Turns a query parameter into an object with filter name and value
+const getFilter = (query) =>
+  Object.fromEntries(
+    Object.entries(query)[0].map((value, index) =>
+      index === 0 ? ["field", value] : ["value", value],
+    ),
+  );
+
 export const getMangaList = async (req, res) => {
-  const mangas = await findMangas();
+  const isQuery = Object.keys(req.query).length > 0;
+
+  const mangas = await (isQuery
+    ? findMangas(getFilter(req.query))
+    : findMangas());
+
   res.render("list", { data: mangas, ROUTE_NAME });
 };
 

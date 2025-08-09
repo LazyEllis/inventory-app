@@ -14,18 +14,6 @@ export const getGenreList = async (req, res) => {
   res.render("list", { data: genres, ROUTE_NAME });
 };
 
-export const getGenre = async (req, res) => {
-  const { id } = req.params;
-
-  const genre = await findGenreById(id);
-
-  if (!genre) {
-    throw new NotFoundError("Genre Not Found");
-  }
-
-  res.render("profile", { data: genre, ROUTE_NAME });
-};
-
 export const renderAddGenreForm = async (req, res) => {
   res.render("form", { ROUTE_NAME });
 };

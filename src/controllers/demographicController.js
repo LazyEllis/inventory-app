@@ -14,18 +14,6 @@ export const getDemographicList = async (req, res) => {
   res.render("list", { data: demographics, ROUTE_NAME });
 };
 
-export const getDemographic = async (req, res) => {
-  const { id } = req.params;
-
-  const demographic = await findDemographicById(id);
-
-  if (!demographic) {
-    throw new NotFoundError("Demographic Not Found");
-  }
-
-  res.render("profile", { data: demographic, ROUTE_NAME });
-};
-
 export const renderAddDemographicForm = async (req, res) => {
   res.render("form", { ROUTE_NAME });
 };

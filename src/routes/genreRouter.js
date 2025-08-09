@@ -3,7 +3,6 @@ import {
   addGenre,
   deleteGenre,
   editGenre,
-  getGenre,
   getGenreList,
   renderAddGenreForm,
   renderEditGenreForm,
@@ -17,8 +16,6 @@ genreRouter.get("/", getGenreList);
 genreRouter.get("/new", renderAddGenreForm);
 
 genreRouter.post("/new", validateGenre, addGenre);
-
-genreRouter.get("/:id", getGenre);
 
 genreRouter.get("/:id/edit", renderEditGenreForm);
 

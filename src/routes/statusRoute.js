@@ -3,7 +3,6 @@ import {
   addStatus,
   deleteStatus,
   editStatus,
-  getStatus,
   getStatusList,
   renderAddStatusForm,
   renderEditStatusForm,
@@ -17,8 +16,6 @@ statusRouter.get("/", getStatusList);
 statusRouter.get("/new", renderAddStatusForm);
 
 statusRouter.post("/new", validateStatus, addStatus);
-
-statusRouter.get("/:id", getStatus);
 
 statusRouter.get("/:id/edit", renderEditStatusForm);
 

@@ -15,18 +15,6 @@ export const getMagazineList = async (req, res) => {
   res.render("list", { data: magazines, ROUTE_NAME });
 };
 
-export const getMagazine = async (req, res) => {
-  const { id } = req.params;
-
-  const magazine = await findMagazineById(id);
-
-  if (!magazine) {
-    throw new NotFoundError("Magazine Not Found");
-  }
-
-  res.render("profile", { data: magazine, ROUTE_NAME });
-};
-
 export const renderAddMagazineForm = async (req, res) => {
   const selectionData = await fetchSelectionData(ROUTE_NAME);
 

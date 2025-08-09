@@ -1,5 +1,6 @@
 <% 
   const routePrefix = (ROUTE_NAME.endsWith('s') ? ROUTE_NAME : ROUTE_NAME.concat('s')).toLowerCase();
+  const routeFilter = ROUTE_NAME.toLowerCase();
   const heading = routePrefix.replace(/\w\S*/g, text => text.charAt(0).toUpperCase() + text.substring(1));
 %> 
 
@@ -10,15 +11,17 @@
         <div class="card-body">
           <% if (ROUTE_NAME === "Manga") { %>
             <div class="row">
-              <a href="/<%= routePrefix %>/<%= item.id %>" class="card-title"><%= item.title %></a>
+              <a href="/mangas/<%= item.id %>" class="card-title"><%= item.title %></a>
               <div><%= item.start_date.getFullYear() %> - <%= item.end_date?.getFullYear() || '?' %></div>
             </div>
             <div class="row">
               <div><%= item.status %></div>
               <div><%= item.volumes || '?' %> vol, <%= item.chapters || '?' %> chp</div>
             </div>
+          <% } else if (ROUTE_NAME === "Role") { %>
+            <div class="card-title"><%= item.name %></div>
           <% } else { %>
-            <a href="/<%= routePrefix %>/<%= item.id %>" class="card-title"><%= item.name %></a>
+            <a href="/mangas?<%= routeFilter %>=<%= item.id %>" class="card-title"><%= item.name %></a>
           <% } %>
         </div>
         <div class="card-footer">

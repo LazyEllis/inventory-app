@@ -14,18 +14,6 @@ export const getStatusList = async (req, res) => {
   res.render("list", { data: status, ROUTE_NAME });
 };
 
-export const getStatus = async (req, res) => {
-  const { id } = req.params;
-
-  const status = await findStatusById(id);
-
-  if (!status) {
-    throw new NotFoundError("Status Not Found");
-  }
-
-  res.render("profile", { data: status, ROUTE_NAME });
-};
-
 export const renderAddStatusForm = async (req, res) => {
   res.render("form", { ROUTE_NAME });
 };

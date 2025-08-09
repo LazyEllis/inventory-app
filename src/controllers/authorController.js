@@ -14,18 +14,6 @@ export const getAuthorList = async (req, res) => {
   res.render("list", { data: authors, ROUTE_NAME });
 };
 
-export const getAuthor = async (req, res) => {
-  const { id } = req.params;
-
-  const author = await findAuthorById(id);
-
-  if (!author) {
-    throw new NotFoundError("Author Not Found");
-  }
-
-  res.render("profile", { data: author, ROUTE_NAME });
-};
-
 export const renderAddAuthorForm = async (req, res) => {
   res.render("form", { ROUTE_NAME });
 };

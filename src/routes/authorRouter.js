@@ -3,7 +3,6 @@ import {
   addAuthor,
   deleteAuthor,
   editAuthor,
-  getAuthor,
   getAuthorList,
   renderAddAuthorForm,
   renderEditAuthorForm,
@@ -17,8 +16,6 @@ authorRouter.get("/", getAuthorList);
 authorRouter.get("/new", renderAddAuthorForm);
 
 authorRouter.post("/new", validateAuthor, addAuthor);
-
-authorRouter.get("/:id", getAuthor);
 
 authorRouter.get("/:id/edit", renderEditAuthorForm);
 
