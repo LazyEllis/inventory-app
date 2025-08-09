@@ -1,2 +1,36 @@
-<%- include("partials/header", { title: `${data.name || data.title} | ${ROUTE_NAME} - Yomu`, heading: data.name || data.title }) %>
+<%- include("partials/header", { title: `${data.name || data.title} | ${ROUTE_NAME} - Yomu`, heading: data.name || data.title, style: "/profile.css" }) %>
+<dl class="profile">
+  <div class="profile-item">
+    <dt>Authors</dt>
+    <dd><%= data.authors.map(author => `${author.name} (${author.role})`).join(", ") %></dd>
+  </div>
+  <div class="profile-item">
+    <dt>Genres</dt>
+    <dd><%= data.genres.map(genre => genre.name).join(", ") %></dd>
+  </div>
+  <div class="profile-item">
+    <dt>Demographic</dt>
+    <dd><%= data.demographic %></dd>
+  </div>
+  <div class="profile-item">
+    <dt>Magazine</dt>
+    <dd><%= data.magazine %></dd>
+  </div>
+  <div class="profile-item">
+    <dt>Volumes</dt>
+    <dd><%= data.volumes || "?" %></dd>
+  </div>
+  <div class="profile-item">
+    <dt>Chapters</dt>
+    <dd><%= data.chapters || "?" %></dd>
+  </div>
+  <div class="profile-item">
+    <dt>Runtime</dt>
+    <dd><%= format(data.start_date, "MMM d, y") %> to <%= data.end_date ? format(data.end_date, "MMM d, y") : "?" %></dd>
+  </div>
+  <div class="profile-item">
+    <dt>Status</dt>
+    <dd><%= data.status %></dd>
+  </div>
+</dl>
 <%- include("partials/footer") %>

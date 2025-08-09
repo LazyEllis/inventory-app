@@ -1,3 +1,4 @@
+import { format } from "date-fns";
 import {
   createManga,
   findMangaById,
@@ -24,7 +25,7 @@ export const getManga = async (req, res) => {
     throw new NotFoundError("Manga Not Found");
   }
 
-  res.render("profile", { data: manga, ROUTE_NAME });
+  res.render("profile", { data: manga, ROUTE_NAME, format });
 };
 
 export const renderAddMangaForm = async (req, res) => {
