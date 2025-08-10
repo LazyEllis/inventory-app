@@ -47,6 +47,11 @@
         <h1><%= heading %></h1>
         <a href="<%= action.link %>" class="btn info"><%= action.name %></a>
       </div>
+    <% } else if (locals.error) { %> 
+      <div class="error">
+        <h1><%= error %></h1>
+        <h2><%= message %></h2>
+      </div>
     <% } else { %> 
       <h1><%= heading %></h1>
     <% } %>
