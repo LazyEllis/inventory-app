@@ -75,7 +75,7 @@ export const validateManga = validate(
         const status = await findStatusById(value);
         const fields = ["end_date", "volumes", "chapters"];
 
-        const isOngoing = status === "Ongoing";
+        const isOngoing = status.name === "Ongoing";
         const isSomeFieldEmpty = fields.some((field) => !req.body[field]);
         const isSomeFieldPresent = fields.some((field) => req.body[field]);
 
