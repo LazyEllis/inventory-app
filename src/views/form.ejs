@@ -3,7 +3,7 @@
   const routePrefix = (ROUTE_NAME.endsWith('s') ? ROUTE_NAME : ROUTE_NAME.concat('s')).toLowerCase();
 %> 
 
-<%- include("partials/header", { title: `${title} - Yomu`, ROUTE_NAME, heading: title, style: "/form.css" }) %>
+<%- include("partials/header", { title: `${title} - Yomu`, ROUTE_NAME, heading: title, style: "form" }) %>
   <% if (locals.errors) {%>
     <div class="alert">
       <h2>There <%= errors.length > 1 ? `were ${errors.length} errors` : "was an error" %> with your submission</h2>

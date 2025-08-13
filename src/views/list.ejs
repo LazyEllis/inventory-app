@@ -4,7 +4,7 @@
   const heading = routePrefix.replace(/\w\S*/g, text => text.charAt(0).toUpperCase() + text.substring(1));
 %> 
 
-<%- include("partials/header", { title: `${ROUTE_NAME} - Yomu`, heading, action: { name: `Add ${ROUTE_NAME}`, link: `/${routePrefix}/new` },  style: "/list.css" }) %>
+<%- include("partials/header", { title: `${ROUTE_NAME} - Yomu`, heading, action: { name: `Add ${ROUTE_NAME}`, link: `/${routePrefix}/new` },  style: "list" }) %>
   <ul class="card-list">
     <% data.forEach(item => { %>
       <li class="card">
